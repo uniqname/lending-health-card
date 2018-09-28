@@ -1,0 +1,50 @@
+{
+  "tabs": [
+    {
+      "label": "Credit Card",
+      "iconSrc": "https://dxkdvuv3hanyu.cloudfront.net/design-assets/icons/pbr/credit-card-light.svg"
+    },
+    {
+      "label": "Term Loan",
+      "iconSrc": "https://dxkdvuv3hanyu.cloudfront.net/design-assets/icons/pbr/loan-dark.svg"
+    }
+  ],
+  "CC": {
+    "status": {
+      "title": "Yay! You qualify for a credit card 🎉",
+      "content": "A credit card is a great option for you right now."
+    },
+
+    "requirements": [
+      {
+        "label": "Personal credit score",
+        "value": "706"
+      },
+      {
+        "label": "Personal credit age",
+        "value": "16yr."
+      },
+      {
+        "label": "Personal inquiries",
+        "value": "2"
+      },
+      {
+        "label": "Personal bankrupcies",
+        "value": "0"
+      },
+      {
+        "label": "Personal credit utilization",
+        "value": "32%"
+      },
+      {
+        "label": "Personal credit limit",
+        "value": "$49,300"
+      }
+    ]
+  },
+  "TL": {
+    "icon": "SmlBiz",
+    "header": "Add your business",
+    "description": "For term loan options, add your business"
+  }
+}

@@ -1,5 +1,6 @@
 import React, { Component } from 'react'
 import styled from 'styled-components'
+import * as lendingHealth from './data'
 import StatusCard from './Components/StatusCard'
 import {
   RequirementContainer,
@@ -7,6 +8,7 @@ import {
   RequirementLabel,
   RequirementValue
 } from './Components/CreditRequirements'
+import TermLoan from './Components/TermLoan'
 import TabGroup from './Components/TabGroup'
 
 const MainWrapper = styled.div`
@@ -39,44 +41,10 @@ class App extends Component {
 
   render () {
     const selectTab = this.selectTab.bind(this)
-    const status = {
-      title: 'YAY STATUS!',
-      content: 'Wow status, much content.'
-    }
+    const { TL, CC, tabs } = lendingHealth
 
-    const tabs = [
-      {
-        label: 'Credit Card',
-        iconSrc: 'https://dxkdvuv3hanyu.cloudfront.net/design-assets/icons/pbr/credit-card-light.svg'
-      },
-      {
-        label: 'Term Loan',
-        iconSrc: 'https://dxkdvuv3hanyu.cloudfront.net/design-assets/icons/pbr/loan-dark.svg'
-      },
-    ]
-
-    const requirements = [
-      {
-        label: 'ReqLabel',
-        value: '768'
-      },
-      {
-        label: 'ReqLabel',
-        value: '768'
-      },
-      {
-        label: 'ReqLabel',
-        value: '768'
-      },
-      {
-        label: 'ReqLabel',
-        value: '768'
-      }
-    ]
-
-    return (
-      <MainWrapper>
-        <TabGroup activeTab={this.state.activeTab} tabs={tabs} selectTab={selectTab} />
+    const CCRequirements = ({ status, requirements }) => (
+      <div>
         <StatusCard status={status} />
         <RequirementHeader>
           Here's what issuers are looking for
@@ -87,6 +55,19 @@ class App extends Component {
             <RequirementValue>{req.value}</RequirementValue>
           </RequirementContainer>
         ))}
+      </div>
+    )
+
+    return (
+      <MainWrapper>
+        <TabGroup
+          activeTab={this.state.activeTab}
+          tabs={tabs}
+          selectTab={selectTab}
+        />
+        {
+          this.state.activeTab === "Credit Card" ? <CCRequirements status={CC.status} requirements={CC.requirements}/> : <TermLoan header={TL.header} description={TL.description} icon={TL.icon} />
+        }
       </MainWrapper>
     )
   }
