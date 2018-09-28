@@ -1,4 +1,3 @@
-import React from 'react';
 import styled from 'styled-components';
 
 const RequirementContainer = styled.div`
@@ -8,11 +7,15 @@ const RequirementContainer = styled.div`
   border-top: 1px solid #D0D2D6;
   margin-top: 8px;
   padding-top: 8px;
+  color: #444751;
 
   &:last-of-type {
     padding-bottom: 8px;
     border-bottom: 1px solid #D0D2D6;
   }
+`
+const RequirementHeader = styled.h3`
+  color: #444751;
 `
 
 const RequirementLabel = styled.p`
@@ -27,12 +30,13 @@ const RequirementValue = styled(RequirementLabel)`
 `
 
 RequirementContainer.displayName = 'RequirementContainer'
+RequirementHeader.displayName = 'RequirementHeader'
 RequirementLabel.displayName = 'RequirementLabel'
 RequirementValue.displayName = 'RequirementValue'
 
-
 export {
   RequirementContainer,
+  RequirementHeader,
   RequirementLabel,
   RequirementValue
 }

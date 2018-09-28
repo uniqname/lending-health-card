@@ -1,7 +1,13 @@
 import React, { Component } from 'react'
 import styled from 'styled-components'
-import StatusCard from './Components/CreditCard/StatusCard'
-import {RequirementLabel, RequirementValue, RequirementContainer} from './Components/CreditCard/CreditRequirements'
+import StatusCard from './Components/StatusCard'
+import {
+  RequirementContainer,
+  RequirementHeader,
+  RequirementLabel,
+  RequirementValue
+} from './Components/CreditRequirements'
+import TabGroup from './Components/TabGroup'
 
 const MainWrapper = styled.div`
   max-width: 650px;
@@ -18,11 +24,36 @@ const MainWrapper = styled.div`
 `
 
 class App extends Component {
+  constructor () {
+    super()
+    this.state = {
+      activeTab: 'Credit Card'
+    }
+  }
+
+  selectTab (tabName) {
+    return this.setState({
+      activeTab: tabName
+    })
+  }
+
   render () {
+    const selectTab = this.selectTab.bind(this)
     const status = {
       title: 'YAY STATUS!',
       content: 'Wow status, much content.'
     }
+
+    const tabs = [
+      {
+        label: 'Credit Card',
+        iconSrc: 'https://dxkdvuv3hanyu.cloudfront.net/design-assets/icons/pbr/credit-card-light.svg'
+      },
+      {
+        label: 'Term Loan',
+        iconSrc: 'https://dxkdvuv3hanyu.cloudfront.net/design-assets/icons/pbr/loan-dark.svg'
+      },
+    ]
 
     const requirements = [
       {
@@ -40,12 +71,16 @@ class App extends Component {
       {
         label: 'ReqLabel',
         value: '768'
-      },
+      }
     ]
 
     return (
       <MainWrapper>
+        <TabGroup activeTab={this.state.activeTab} tabs={tabs} selectTab={selectTab} />
         <StatusCard status={status} />
+        <RequirementHeader>
+          Here's what issuers are looking for
+        </RequirementHeader>
         {requirements.map(req => (
           <RequirementContainer>
             <RequirementLabel>{req.label}</RequirementLabel>
