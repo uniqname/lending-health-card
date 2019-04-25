@@ -1,6 +1,6 @@
 # Lending Health Card
 
-See it [here](https://bardleware.github.io/lending-health-card/)
+See it [here](https://devan-sisson.github.io/lending-health-card/)
 
 _Bootstrapped with `create-react-app`_
 
