@@ -14,7 +14,7 @@
 importScripts("https://storage.googleapis.com/workbox-cdn/releases/4.3.0/workbox-sw.js");
 
 importScripts(
-  "/lending-health-card/precache-manifest.9d5923e7f2af1b344b27178af7b2b2df.js"
+  "/lending-health-card/precache-manifest.361c54bd4853543ad98e1676c8335f0f.js"
 );
 
 self.addEventListener('message', (event) => {
