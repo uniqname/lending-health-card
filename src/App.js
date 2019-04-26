@@ -49,8 +49,8 @@ class App extends Component {
         <RequirementHeader>
           Here's what issuers are looking for
         </RequirementHeader>
-        {requirements.map(req => (
-          <RequirementContainer>
+        {requirements.map((req, i) => (
+          <RequirementContainer key={`${req.lable}-${i}`}>
             <RequirementLabel>{req.label}</RequirementLabel>
             <RequirementValue>{req.value}</RequirementValue>
           </RequirementContainer>

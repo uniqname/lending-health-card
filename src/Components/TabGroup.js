@@ -41,7 +41,7 @@ const Tab = styled.div`
   }
 `
 
-const ActiveTab = Tab.extend`
+const ActiveTab = styled(Tab)`
   background: #D0D2D6;
 `
 
