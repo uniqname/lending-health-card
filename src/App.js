@@ -24,50 +24,60 @@ const MainWrapper = styled.div`
   margin-top: 42px;
 }
 `
+/* these are static to the lendingHealth module, they can be destructured immediately */
+const { TL, CC, tabs } = lendingHealth
+
+// You already made it it's own component, recreating this component every render would be unnecessary and inefficient.
+const CCRequirements = ({ status = {}, requirements = [] }) => (
+  <div>
+    <StatusCard title={status.title} content={status.content} />
+    <RequirementHeader>Here's what issuers are looking for</RequirementHeader>
+    {requirements.map(({ label, value }, i) => (
+      <RequirementContainer key={`${label}-${i}`}>
+        <RequirementLabel>{label}</RequirementLabel>
+        <RequirementValue>{value}</RequirementValue>
+      </RequirementContainer>
+    ))}
+  </div>
+)
 
 class App extends Component {
-  constructor () {
-    super()
-    this.state = {
-      activeTab: 'Credit Card'
-    }
+  /*
+   * if all we are doing is creating local state that is not dependent on props,
+   * we can just use a class property
+   */
+
+  /*
+   * If we were using a more recent version of react, we would want to be using the `useState` hook instead.
+   */
+  state = {
+    activeTab: 'Credit Card'
   }
 
-  selectTab (tabName) {
-    return this.setState({
-      activeTab: tabName
-    })
-  }
+  /*
+   * If using classes, I'd use class properties rather than instance methods that need to be bound.
+   * If you find you do have a need(or prefer) an instance method that needs to be bound,
+   * bind it in the constructor.
+   */
+  selectTab = (tabName) => this.setState({ activeTab: tabName })
 
-  render () {
-    const selectTab = this.selectTab.bind(this)
-    const { TL, CC, tabs } = lendingHealth
-
-    const CCRequirements = ({ status, requirements }) => (
-      <div>
-        <StatusCard status={status} />
-        <RequirementHeader>
-          Here's what issuers are looking for
-        </RequirementHeader>
-        {requirements.map((req, i) => (
-          <RequirementContainer key={`${req.lable}-${i}`}>
-            <RequirementLabel>{req.label}</RequirementLabel>
-            <RequirementValue>{req.value}</RequirementValue>
-          </RequirementContainer>
-        ))}
-      </div>
-    )
-
+  render() {
     return (
       <MainWrapper>
         <TabGroup
           activeTab={this.state.activeTab}
           tabs={tabs}
-          selectTab={selectTab}
+          selectTab={this.selectTab}
         />
-        {
-          this.state.activeTab === "Credit Card" ? <CCRequirements status={CC.status} requirements={CC.requirements}/> : <TermLoan header={TL.header} description={TL.description} icon={TL.icon} />
-        }
+        {this.state.activeTab === 'Credit Card' ? (
+          <CCRequirements status={CC.status} requirements={CC.requirements} />
+        ) : (
+          <TermLoan
+            header={TL.header}
+            description={TL.description}
+            icon={TL.icon}
+          />
+        )}
       </MainWrapper>
     )
   }

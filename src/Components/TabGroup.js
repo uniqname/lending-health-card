@@ -4,7 +4,7 @@ import styled from 'styled-components'
 const Group = styled.div`
   display: flex;
   flex: 1 1 100%;
-  border: 1px solid #D0D2D6;
+  border: 1px solid #d0d2d6;
   border-radius: 4px;
   overflow: hidden;
   margin-bottom: 8px;
@@ -14,20 +14,21 @@ const Group = styled.div`
     flex: 1 1 100px;
   }
 `
+Group.displayName = 'Group'
 
 const Tab = styled.div`
   display: flex;
   align-self: stretch;
   flex-flow: row wrap;
   padding: 8px;
-  border-right: 1px solid #D0D2D6;
-  background: #FFF;
+  border-right: 1px solid #d0d2d6;
+  background: #fff;
   cursor: pointer;
 
   & > span {
     flex: 1 1 100%;
     align-self: flex-end;
-    text-align:center;
+    text-align: center;
   }
   &:first-of-type {
     border-bottom-left-radius: 4px;
@@ -40,44 +41,45 @@ const Tab = styled.div`
     border-top-right-radius: 4px;
   }
 `
+Tab.displayName = 'Tab'
 
 const ActiveTab = styled(Tab)`
-  background: #D0D2D6;
+  background: #d0d2d6;
 `
+ActiveTab.displayName = 'ActiveTab'
 
 const TabIcon = styled.img`
   width: 24px;
   height: auto;
   margin: 8px auto;
 `
+TabIcon.displayName = 'TabIcon'
 
 const TabLabel = styled.span`
+  /* This kind of thing is better in global styles, unless it's a one off font */
   font-family: Roboto, Helvetica, sans-serif;
 `
+TabLabel.displayName = 'TabLabel'
 
-const TabGroup = ({ selectTab, tabs, activeTab }) => (
+const TabGroup = ({ selectTab = () => {}, tabs = [], activeTab = '' }) => (
   <Group>
-    {
-      tabs.map(tab => {
-        const T = tab.label === activeTab ? ActiveTab : Tab;
-        return (
-        <T key={tab.label} onClick={(e)=>{selectTab(tab.label)}}>
-          <TabIcon src={tab.iconSrc} />
-          <TabLabel>
-            {tab.label}
-          </TabLabel>
-        </T>
-      )}
+    {tabs.map(({ label = '', iconSrc = '' }) => {
+      const CurrentTab = label === activeTab ? ActiveTab : Tab
+      return (
+        <CurrentTab
+          key={label}
+          onClick={(e) => {
+            selectTab(label)
+          }}
+        >
+          <TabIcon src={iconSrc} />
+          <TabLabel>{label}</TabLabel>
+        </CurrentTab>
       )
-    }
+    })}
   </Group>
 )
 
 TabGroup.displayName = 'TabGroup'
-TabIcon.displayName = 'TabIcon'
-TabLabel.displayName = 'TabLabel'
-ActiveTab.displayName = 'ActiveTab'
-Tab.displayName = 'Tab'
-Group.displayName = 'Group'
 
 export default TabGroup

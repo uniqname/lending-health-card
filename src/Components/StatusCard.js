@@ -4,7 +4,7 @@ import styled from 'styled-components'
 const CardWrapper = styled.div`
   flex: 1 1 100%;
   padding: 16px;
-  background-color: #DCE8E3;
+  background-color: #dce8e3;
   border-radius: 4px;
 `
 
@@ -20,10 +20,10 @@ const Content = styled.p`
   margin: 0px;
 `
 
-const StatusCard = ({status}) => (
+const StatusCard = ({ title = '', content = '' }) => (
   <CardWrapper>
-    <Header>{status.title}</Header>
-    <Content>{status.content}</Content>
+    <Header>{title}</Header>
+    <Content>{content}</Content>
   </CardWrapper>
 )
 
